@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bassketball Everywhere</title>
+  <meta name="description" content="Bassketball Everywhere — highlights, teams, schedule and community for basketball lovers." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#ff6b35;
+      --muted: #9aa4b2;
+      --glass: rgba(255,255,255,0.03);
+    }
+    *{box-sizing: border-box; margin:0; padding:0}
+    html,body{height:100%}
+    body{
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#071020 0%, #07182a 70%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    .container{max-width:1100px; margin:0 auto; padding:28px;}
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; margin-bottom:22px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .logo{
+      width:56px; height:56px; border-radius:10px;
+      background:linear-gradient(135deg,#ff8a4c, #ff3b6b);
+      display:flex; align-items:center; justify-content:center; font-weight:800;
+      color:white; font-size:20px; box-shadow:0 6px 18px rgba(255,107,53,0.12);
+    }
+    h1.site-title{font-size:20px; letter-spacing:0.6px}
+    nav ul{list-style:none; display:flex; gap:12px; align-items:center;}
+    nav a{
+      color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:8px; font-weight:600;
+    }
+    nav a:hover{color: white; background: rgba(255,255,255,0.03)}
+    .hero{
+      display:grid; grid-template-columns: 1fr 420px; gap:20px; align-items:center;
+      margin:26px 0 40px;
+    }
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:26px; border-radius:14px; box-shadow: 0 6px 30px rgba(2,6,23,0.5);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .headline{font-size:32px; margin-bottom:10px}
+    .sub{color:var(--muted); margin-bottom:18px}
+    .cta-row{display:flex; gap:12px; align-items:center}
+    .btn{
+      background:var(--accent); color:#08101a; padding:12px 16px; border-radius:10px;
+      font-weight:700; border:none; cursor:pointer; box-shadow:0 8px 24px rgba(255,107,53,0.12);
+    }
+    .btn.ghost{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.03)}
+    .stats{display:flex; gap:12px; margin-top:16px}
+    .stat{background:var(--glass); padding:10px 14px; border-radius:10px; text-align:center}
+    .stat strong{display:block; font-size:18px}
+    /* right hero preview */
+    .preview{
+      border-radius:14px; overflow:hidden; position:relative; height:100%;
+      min-height:260px; background:linear-gradient(180deg,#07182a,#052033);
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+      padding:18px;
+    }
+    .preview img{width:100%; height:220px; object-fit:cover; border-radius:10px; display:block; box-shadow: 0 8px 28px rgba(2,6,23,0.6)}
+    .preview .mini{margin-top:12px; color:var(--muted); font-weight:600;}
+    /* sections */
+    section{margin-bottom:34px}
+    .section-title{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px}
+    .cards{display:grid; grid-template-columns: repeat(3,1fr); gap:14px}
+    .card{background:var(--card); padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
+    .card h3{font-size:16px; margin-bottom:6px}
+    .muted{color:var(--muted); font-size:14px}
+    /* team */
+    .team-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+    .player{display:flex; gap:12px; align-items:center}
+    .avatar{width:64px; height:64px; border-radius:10px; background:linear-gradient(135deg,#0b2a3a,#06324a); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; color:#cde9ff}
+    .player .meta small{color:var(--muted); display:block}
+    /* gallery */
+    .gallery{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
+    .gallery img{width:100%; height:140px; object-fit:cover; border-radius:10px; display:block}
+    /* schedule */
+    table{width:100%; border-collapse:collapse; background:transparent}
+    th,td{padding:10px; text-align:left; border-bottom:1px dashed rgba(255,255,255,0.03)}
+    th{color:var(--muted); font-weight:700; font-size:13px}
+    .footer{
+      padding:26px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.02); margin-top:24px; display:flex; justify-content:space-between; gap:12px; align-items:center;
+    }
+    /* responsive */
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr; }
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .team-grid{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 520px){
+      header{flex-direction:column; align-items:flex-start; gap:12px;}
+      nav ul{flex-wrap:wrap}
+      .cards{grid-template-columns:1fr}
+      .team-grid{grid-template-columns:1fr}
+      .gallery{grid-template-columns:1fr}
+      .brand h1{font-size:16px}
+      .headline{font-size:24px}
+    }
+    /* small helper */
+    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.02); font-weight:700; color:var(--muted)}
+    .muted-small{color:var(--muted); font-size:13px}
+    .center{text-align:center}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">BB</div>
+        <div>
+          <h1 class="site-title">Bassketball Everywhere</h1>
+          <div class="muted-small">Hoops, highlights & community</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#teams">Team</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="home">
+      <div class="hero">
+        <div class="hero-card">
+          <div class="headline">Bassketball Everywhere — Play. Learn. Share.</div>
+          <div class="sub">News, drills, community highlights, schedules and player profiles — everything basketball in one place.</div>
+
+          <div class="cta-row">
+            <button class="btn" onclick="scrollToSection('teams')">Meet The Teams</button>
+            <button class="btn ghost" onclick="scrollToSection('gallery')">View Highlights</button>
+          </div>
+
+          <div class="stats" role="list" aria-label="Site stats">
+            <div class="stat">
+              <small class="muted">Active Teams</small>
+              <strong>18</strong>
+            </div>
+            <div class="stat">
+              <small class="muted">Upcoming Games</small>
+              <strong>6</strong>
+            </div>
+            <div class="stat">
+              <small class="muted">Photos</small>
+              <strong>150+</strong>
+            </div>
+          </div>
+        </div>
+
+        <aside class="preview">
+          <img src="https://picsum.photos/seed/bb1/900/500" alt="Basketball action photo">
+          <div class="mini">Catch the latest plays and community highlights.</div>
+        </aside>
+      </div>
+
+      <section id="teams">
+        <div class="section-title">
+          <h2>Featured Teams</h2>
+          <div class="pill">Local • Amateur • School</div>
+        </div>
+
+        <div class="team-grid">
+          <div class="card player">
+            <div class="avatar">T1</div>
+            <div class="meta">
+              <h3>Turno Ballers</h3>
+              <small class="muted">Coach: R. Santos • City League</small>
+            </div>
+          </div>
+
+          <div class="card player">
+            <div class="avatar">ZN</div>
+            <div class="meta">
+              <h3>Znnhs Hoops</h3>
+              <small class="muted">Coach: A. Lopez • Varsity</small>
+            </div>
+          </div>
+
+          <div class="card player">
+            <div class="avatar">BR</div>
+            <div class="meta">
+              <h3>Brnt Hoopers</h3>
+              <small class="muted">Coach: M. Cruz • Community</small>
+            </div>
+          </div>
+
+          <div class="card player">
+            <div class="avatar">E1</div>
+            <div class="meta">
+              <h3>Everywhere Eagles</h3>
+              <small class="muted">Coach: L. Reyes • Open Gym</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery">
+        <div class="section-title">
+          <h2>Gallery & Highlights</h2>
+          <div class="muted">Top plays from recent games</div>
+        </div>
+
+        <div class="gallery">
+          <img src="https://picsum.photos/seed/g1/800/600" alt="highlight 1">
+          <img src="https://picsum.photos/seed/g2/800/600" alt="highlight 2">
+          <img src="https://picsum.photos/seed/g3/800/600" alt="highlight 3">
+          <img src="https://picsum.photos/seed/g4/800/600" alt="highlight 4">
+        </div>
+      </section>
+
+      <section id="schedule">
+        <div class="section-title">
+          <h2>Upcoming Schedule</h2>
+          <div class="muted">All times local</div>
+        </div>
+
+        <div class="card">
+          <table aria-label="Upcoming games">
+            <thead>
+              <tr><th>Date</th><th>Match</th><th>Location</th><th>Time</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Oct 25, 2025</td><td>Turno Ballers vs Znnhs Hoops</td><td>Main Court — City Arena</td><td>4:00 PM</td></tr>
+              <tr><td>Nov 02, 2025</td><td>Brnt Hoopers vs Everywhere Eagles</td><td>Community Gym — Hall B</td><td>6:00 PM</td></tr>
+              <tr><td>Nov 10, 2025</td><td>All-Star Scrimmage</td><td>East Court</td><td>5:00 PM</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="news" aria-hidden="false">
+        <div class="section-title">
+          <h2>Latest News</h2>
+          <div class="muted">Announcements & updates</div>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <h3>Open Tryouts — Nov 5</h3>
+            <div class="muted">Sign-ups open for all age groups. Bring ID and appropriate gear.</div>
+          </div>
+          <div class="card">
+            <h3>Training Camp Recap</h3>
+            <div class="muted">Photos and drills posted from last weekend's camp.</div>
+          </div>
+          <div class="card">
+            <h3>Community Clean-Up</h3>
+            <div class="muted">We cleaned up the courts — big thanks to volunteers!</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-title">
+          <h2>Contact & Join</h2>
+          <div class="muted">Get in touch or request to join a team</div>
+        </div>
+
+        <div class="card" style="display:grid; grid-template-columns:1fr 360px; gap:14px;">
+          <div>
+            <form id="contactForm" onsubmit="handleContact(event)">
+              <div style="display:flex; gap:10px; margin-bottom:10px;">
+                <input required name="name" placeholder="Your name" style="flex:1; padding:10px; border-radius:8px; background:transparent; border:1px solid rgba(255,255,255,0.04); color:inherit">
+                <input required name="email" type="email" placeholder="Email" style="width:220px; padding:10px; border-radius:8px; background:transparent; border:1px solid rgba(255,255,255,0.04); color:inherit">
+              </div>
+              <textarea required name="message" placeholder="Message or request" style="width:100%; min-height:110px; padding:10px; border-radius:8px; background:transparent; border:1px solid rgba(255,255,255,0.04); color:inherit"></textarea>
+              <div style="margin-top:10px;">
+                <button class="btn" type="submit">Send Message</button>
+                <button type="button" class="btn ghost" onclick="openMail()">Email Us</button>
+              </div>
+            </form>
+            <div id="contactResult" style="margin-top:10px;color:var(--muted)"></div>
+          </div>
+
+          <div>
+            <div style="margin-bottom:10px" class="muted-small">Location</div>
+            <div class="card" style="padding:10px;">Community Gym • City Arena • East Court</div>
+
+            <div style="margin-top:12px" class="muted-small">Follow</div>
+            <div style="display:flex; gap:8px; margin-top:8px">
+              <a class="pill" href="#" onclick="alert('Replace with your social link')">Instagram</a>
+              <a class="pill" href="#" onclick="alert('Replace with your social link')">Facebook</a>
+              <a class="pill" href="#" onclick="alert('Replace with your social link')">YouTube</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        <div>
+          <strong>Bassketball Everywhere</strong>
+          <div class="muted-small">Built with ❤️ for the hoops community</div>
+        </div>
+        <div class="muted-small">© <span id="year"></span> • All rights reserved</div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // small helpers
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    function openMail(){
+      window.location.href = 'mailto:hello@bassketballeverywhere.com?subject=Join%20Bassketball%20Everywhere';
+    }
+
+    function handleContact(e){
+      e.preventDefault();
+      const f = e.target;
+      const name = f.name.value.trim();
+      const email = f.email.value.trim();
+      const msg = f.message.value.trim();
+      // no backend included — preview functionality:
+      const preview = `Thanks, ${name}! We received your message. (This website is a demo — implement a backend to send messages.)`;
+      document.getElementById('contactResult').textContent = preview;
+      f.reset();
+    }
+
+    // small accessible keyboard navigation
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'k' && (e.ctrlKey || e.metaKey)){
+        e.preventDefault();
+        const q = prompt('Jump to (home, teams, gallery, schedule, contact):');
+        if(q) scrollToSection(q.toLowerCase());
+      }
+    });
+  </script>
+</body>
+</html>
